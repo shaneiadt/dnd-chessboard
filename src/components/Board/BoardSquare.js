@@ -1,10 +1,9 @@
 import React from 'react'
 import Square from '../Square/Square'
-import { moveKnight } from '../../Game'
 import { ItemTypes } from '../../ItemTypes'
 import { useDrop } from 'react-dnd'
 
-function BoardSquare({ x, y, children }) {
+function BoardSquare({ x, y, children, moveKnight }) {
   const black = (x + y) % 2 === 1
   const [{ isOver }, drop] = useDrop(() => ({
     accept: ItemTypes.KNIGHT,

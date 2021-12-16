@@ -5,13 +5,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import Knight from '../Knight/Knight';
 import BoardSquare from './BoardSquare';
 
-function renderSquare(i, knightPosition) {
+function renderSquare(i, knightPosition, moveKnight) {
   const x = i % 8;
   const y = Math.floor(i / 8);
 
   return (
     <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
-      <BoardSquare x={x} y={y}>
+      <BoardSquare x={x} y={y} moveKnight={moveKnight}>
         {renderPiece(x, y, knightPosition)}
       </BoardSquare>
     </div>
@@ -24,10 +24,10 @@ function renderPiece(x, y, [knightX, knightY]) {
   }
 }
 
-export default function Board({ knightPosition }) {
+export default function Board({ knightPosition, moveKnight }) {
   const squares = []
   for (let i = 0; i < 64; i++) {
-    squares.push(renderSquare(i, knightPosition))
+    squares.push(renderSquare(i, knightPosition, moveKnight))
   }
 
   return (
