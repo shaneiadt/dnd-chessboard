@@ -1,7 +1,9 @@
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { connect } from "react-redux";
 
+import { moveKnight } from '../../actions';
 import Knight from '../Knight/Knight';
 import BoardSquare from './BoardSquare';
 
@@ -24,7 +26,7 @@ function renderPiece(x, y, [knightX, knightY]) {
   }
 }
 
-export default function Board({ knightPosition, moveKnight }) {
+function Board({ knightPosition, moveKnight }) {
   const squares = []
   for (let i = 0; i < 64; i++) {
     squares.push(renderSquare(i, knightPosition, moveKnight))
@@ -46,3 +48,11 @@ export default function Board({ knightPosition, moveKnight }) {
     </DndProvider>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    knightPosition: state.knight
+  };
+}
+
+export default connect(mapStateToProps, { moveKnight })(Board);
